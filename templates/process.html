@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<title>Upload new File</title>
+<link rel="stylesheet" href="./static/style.css"></link>
+</head>
+<body>
+<h1>Upload new File</h1>
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=GENERATE>
+</form>
+
+{% macro foreach(keys, items, index) -%}
+    {% for key in keys %}
+    <td>
+        {{items[key][index]}}
+    </td>
+    {% endfor %}
+{% endmacro %}
+
+<table class="test">
+    <tr>
+    {% for item in items %}
+        <th>{{item}}</th>
+    {% endfor %}
+    </tr>
+    {% for i in items[keys[0]] %}
+    <tr>
+        {{ foreach(keys, items, loop.index0) }}
+    </tr>
+    {% endfor %}
+</table>
+<br>
+</body>
+</html>

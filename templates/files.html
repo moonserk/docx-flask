@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<form method=post>
+    <input type=submit value="append files"/>
+</form>
+
+<table>
+    {% for entry in entries  | sort(attribute="name") %}
+
+    {% if not entry.is_file() %}
+    <tr>
+        <td>
+            <a href="{{ url_for("dir_viewer", path=entry.path) }}">
+                dir {{ entry.name }}
+            </a>
+        </td>
+    </tr>
+
+    {% else %}
+
+    <tr>
+            <td>
+                <a href="{{ url_for("download_file", path=entry.path) }}">{{ entry.name }}</a>
+            </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+
+</table>
