@@ -2,13 +2,19 @@
 <html>
 <head>
 <title>Upload new File</title>
-<link rel="stylesheet" href="./static/style.css"></link>
+<link rel="stylesheet" href="/static/style.css"></link>
 </head>
 <body>
-<h1>Upload new File</h1>
+<div class="nav">
+    <h3>Вставте шаблон</h3>
+</div>
+
 <form method=post enctype=multipart/form-data>
-    <input type=file name=file>
-    <input type=submit value=GENERATE>
+    <label class="btn">
+        <input type=file name=file>
+        Загрузить шаблон
+    </label>
+    <input class="btn" type=submit value="Сгенерировать файлы">
 </form>
 
 {% macro foreach(keys, items, index) -%}
@@ -22,7 +28,9 @@
 <table class="test">
     <tr>
     {% for item in items %}
-        <th>{{item}}</th>
+        <th>{{item}}
+            <input type="checkbox" value={{item}} />
+        </th>
     {% endfor %}
     </tr>
     {% for i in items[keys[0]] %}

@@ -1,7 +1,15 @@
 <!DOCTYPE html>
-<form method=post>
-    <input type=submit value="append files"/>
-</form>
+<title>Файлы готовые для загрузки</title>
+<link rel="stylesheet" href="./static/style.css"></link>
+
+<div class="nav">
+    <h3 class="left">Файлы</h3>
+
+    <form class="right" method=post>
+        <input class="btn" type=submit value="Скачать все файлы"/>
+    </form>
+</div>
+
 
 <table>
     {% for entry in entries  | sort(attribute="name") %}

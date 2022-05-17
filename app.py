@@ -1,4 +1,5 @@
 import os
+import zipfile
 
 from flask import Flask, url_for, render_template, request, redirect, session, send_file
 from werkzeug.utils import secure_filename
@@ -64,7 +65,7 @@ def combine_word_documents(files):
 
     for index, file in enumerate(files):
         sub_doc = Document(file)
-
+        #style.font.size = Pt(12)
         if index < len(files) - 1:
             sub_doc.add_page_break()
 
@@ -72,6 +73,14 @@ def combine_word_documents(files):
             merged_document.element.body.append(element)
 
     merged_document.save('./docs/all.docx')
+
+def zip_all_files(dfiles):
+
+    z = zipfile.ZipFile('spam.zip', 'w')        # Создание нового архива
+    for root, dirs, files in os.walk('./docs'): # Список всех файлов и папок в директории folder
+            for file in files:
+                z.write(os.path.join(root,file))         # Создание относительных путей и запись файлов в архив
+    z.close()
 
 @app.route('/<path:path>', methods=['GET', 'POST'])
 def dir_viewer(path):
@@ -83,7 +92,9 @@ def dir_viewer(path):
             files.append("./docs/" + filedocx)
 
     if (request.method == 'POST'):
-        combine_word_documents(files)
+        #combine_word_documents(files)
+        zip_all_files(files)
+        return send_file("spam.zip")
 
     return render_template('files.html', entries=entries)
 
