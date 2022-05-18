@@ -10,5 +10,5 @@ WORKDIR /app
 
 RUN chmod a+rwx ./gunicorn.sh
 
-ENTRYPOINT ["./gunicorn.sh"]FROM 
+ENTRYPOINT ["./gunicorn.sh"]
 
