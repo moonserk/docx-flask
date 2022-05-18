@@ -1,0 +1,7 @@
+Flask
+pyexcel
+pyexcel-xls
+python-docx
+Werkzeug
+num2words
+gunicorn
